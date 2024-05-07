@@ -1,6 +1,6 @@
-class Transaccion:
-    def __init__(self, id, servicio, cliente, estado):
+class Transaction:
+    def __init__(self, id, service, client, status):
         self.id = id
-        self.servicio = servicio
-        self.cliente = cliente
-        self.estado = estado  # 'pendiente', 'completado', 'cancelado'
+        self.service = service
+        self.client = client
+        self.status = status  # 'pendiente', 'completado', 'cancelado'

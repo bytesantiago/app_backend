@@ -2,6 +2,7 @@ from flask import Flask, g
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from infrastructure.controllers.user_controllers import bp as user_controllers
+from infrastructure.controllers.notion_controller import bp as notion_controllers
 from infrastructure.adapters.user_repository_adapter_sqlalchemy import UserRepositorySQLAlchemy
 
 # Configuración de la base de datos
@@ -16,6 +17,7 @@ def hello_world():
     return '¡Hola Mundo!'
 
 app.register_blueprint(user_controllers)
+app.register_blueprint(notion_controllers)
 
 @app.before_request
 def before_request():
