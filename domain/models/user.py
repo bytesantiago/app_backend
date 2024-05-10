@@ -3,4 +3,4 @@ class User:
         self.id = id
         self.name = name
         self.email = email
-        self.user_type = user_type  # 'provider' o 'client'
+        self.user_type = user_type
