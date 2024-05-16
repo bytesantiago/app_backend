@@ -1,11 +1,14 @@
-from flask import Blueprint, request, jsonify, g
-from application.use_cases import CreateUser
-from infrastructure.adapters.user_repository_adapter_sqlalchemy import UserRepositorySQLAlchemy
+from flask import Blueprint, g, jsonify, request
 from sqlalchemy.orm import scoped_session
 
-bp = Blueprint('usuario', __name__, url_prefix='/usuarios')
+from application.user_use_cases import CreateUser
+from infrastructure.adapters.user_repository_adapter_sqlalchemy import \
+    UserRepositorySQLAlchemy
 
-@bp.route('/', methods=['POST'])
+bp = Blueprint("usuario", __name__, url_prefix="/usuarios")
+
+
+@bp.route("/", methods=["POST"])
 def create_user():
     user_data = request.get_json()
 

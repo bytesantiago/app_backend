@@ -1,6 +1,8 @@
-from domain.ports.user_repository import UserRepository
 from sqlalchemy.orm import Session
+
 from domain.models.user import User
+from domain.ports.user_repository import UserRepository
+
 
 class UserRepositorySQLAlchemy(UserRepository):
     def __init__(self, session: Session):

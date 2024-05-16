@@ -1,3 +1,3 @@
 class PropertyRepository:
-    def create_user(self, property_data):
+    def create_property(self, property_data):
         raise NotImplementedError

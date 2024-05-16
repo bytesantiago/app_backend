@@ -1,5 +1,5 @@
 class Property:
-    def __init__(self, id, title, description, price, pictures):
+    def __init__(self, title, description, price, pictures, id=None):
         self.id = id
         self.title = title
         self.description = description
