@@ -2,10 +2,10 @@ import os
 
 import requests
 
-from domain.models.property import Property
+from domain import Property
 
 
-class NotionService:
+class NotionPropertiesRepository:
     def __init__(self):
         self.notion_token = os.getenv("NOTION_TOKEN")
         self.database_id = os.getenv("DATABASE_ID")
@@ -49,6 +49,31 @@ class NotionService:
 
         return property_list
 
+    def create_property(self, property_data: Property):
+        url = f"{self.base_url}/pages"
+        payload = {
+            "parent": {"database_id": self.database_id},
+            "properties": self.parse_create_property_payload(property_data),
+        }
+        response = requests.post(url, headers=self.headers, json=payload)
+
+        return response
+
+    def update_property(self, property_data, property_page_id):
+        url = f"{self.base_url}/pages/{property_page_id}"
+        payload = {"properties": property_data}
+        response = requests.patch(url, headers=self.headers, json=payload)
+
+        return response
+
+    def delete_property(self, property_page_id):
+        url = f"{self.base_url}/pages/{property_page_id}"
+
+        payload = {"archived": True}
+
+        response = requests.patch(url, headers=self.headers, json=payload)
+        return response
+
     def parse_title_content(self, title_content: dict):
         title = None
         for item in title_content["title"]:
@@ -76,16 +101,6 @@ class NotionService:
             files.append(item["file"]["url"])
 
         return files
-
-    def create_property(self, property_data: Property):
-        url = f"{self.base_url}/pages"
-        payload = {
-            "parent": {"database_id": self.database_id},
-            "properties": self.parse_create_property_payload(property_data),
-        }
-        response = requests.post(url, headers=self.headers, json=payload)
-
-        return response
 
     def parse_create_property_payload(self, property_data: Property):
         return {

@@ -1,0 +1,1 @@
+from .controllers.property_controller import property_controller_blueprint as property_controller

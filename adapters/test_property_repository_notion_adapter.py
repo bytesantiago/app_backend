@@ -2,10 +2,10 @@ import os
 from unittest.mock import Mock, patch
 
 import pytest
-
-from domain.models.property import Property
 from infrastructure.adapters.property_repository_notion_adapter import \
     NotionService
+
+from domain.models.property import Property
 
 
 class TestNotionService:
